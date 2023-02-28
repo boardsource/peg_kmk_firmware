@@ -1,0 +1,23 @@
+name: build_mpy
+on: [push]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: run build script
+      run: ./docker_mpy_build.sh
+
+    - name: look
+      run: ls -la compiled/
+
+    - name: Archive
+      uses: actions/upload-artifact@v3
+      with:
+        name: mpy
+        path: compiled

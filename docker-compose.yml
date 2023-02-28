@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  mpy_kmk:
+    build: .
+    volumes:
+      - ./kmk:/app/kmk
+      - ./.compiled:/app/compiled

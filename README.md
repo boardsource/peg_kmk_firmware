@@ -25,10 +25,8 @@ This is the version of kmk frozen into [bs-python](https://github.com/boardsourc
 
 In closing "Pay no attention to that man behind the curtain." You should not need to know about this but its here and there are reasons. please use, love and contribute to kmk its awesome and the people working on it are great.
 
-## Getting Started
-KMK requires [CircuitPython](https://circuitpython.org/) version 7.0 or higher.
-Our getting started guide can be found
-[here](/docs/en/Getting_Started.md).
+So really this is a known constant peg supports this version of kmk.
+This is the version of kmk frozen into [bs-python](https://github.com/boardsource/bs-python)
 
 ## Contributing
 

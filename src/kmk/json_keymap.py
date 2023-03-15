@@ -45,6 +45,7 @@ class DataKeys:
     combos = 'combos'
     combos_keys = CombosKeys
     keymap = 'keymap'
+    layers="layers"
     peg_rgb_matrix = 'pegRgbMatrix'
     peg_rgb_matrix_keys = PegRgbMatrixKeys
     peg_oled_display = 'pegOledDisplay'
@@ -88,7 +89,7 @@ class JsonMap:
         self.add_imports()
         self.handle_code_block()
         for data in self._data:
-            if data == DataKeys.keymap:
+            if data == DataKeys.keymap or data==DataKeys.layers:
                 self.handle_keymap(self._data[data])
             if data == DataKeys.peg_rgb_matrix:
                 self.handle_peg_rgb_matrix(self._data[data])
@@ -304,6 +305,7 @@ class JsonMap:
         self._combos.combos = keymap_combos
 
     def handle_keymap(self, keymap):
+
         for _, layer in enumerate(keymap):
             for key_idx, key in enumerate(layer):
                 layer[key_idx] = self.return_key(key)

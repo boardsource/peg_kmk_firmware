@@ -208,15 +208,13 @@ class JsonKb(KMKKeyboard):
 
         if self.development_board_pin_names == DevelopmentBoards.promicro:
             from kmk.quickpin.pro_Micro.avr_promicro import translate as avr
-        if self.development_board_pin_names == self.development_board:
-            return pins[pin]
         elif (
             self.development_board_pin_names == DevelopmentBoards.raw
             and self.development_board == DevelopmentBoards.none
         ):
             import board
 
-            return board[pin]
+            return getattr(board,pin)
         else:
             return pins[avr[pin]]
 

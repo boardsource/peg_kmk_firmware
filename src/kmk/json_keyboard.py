@@ -1,6 +1,7 @@
 import json
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.modules.layers import Layers
+import re
 
 
 class ScannerType:
@@ -100,8 +101,8 @@ class JsonKb(KMKKeyboard):
             f = open(self._json_path, 'r')
             keymap_string = f.read()
             f.close()
-            keymap_dict = json.loads(keymap_string)
-            self._info = keymap_dict['info']
+            self.keymap_dict= json.loads(keymap_string)
+            self._info= self.keymap_dict["info"]
         except:
             print('json file load failed')
 
@@ -316,14 +317,17 @@ class JsonKb(KMKKeyboard):
                 pin_b=self.pin_b,
             )
             self.matrix.append(scanner)
-
-    def clean_up(self):
-        # del self.setup_scanner
-        del self.process_data
-        del self.matrix_pins
-        del self.layouts
-        del self.extract_settings
-        del self.set_diode_orientation
-        del self.read_json
-        del self._info
+    def blank(self):
+        print("blank was called somethings wrong")
         pass
+    def clean_up(self):
+        blank=self.blank
+        self.setup_scanner=blank
+        self.process_data=blank
+        self.matrix_pins=blank
+        self.layouts=blank
+        self.extract_settings=blank
+        self.set_diode_orientation=blank
+        self.read_json=blank
+        self._info={}
+        self.keymap_dict={}

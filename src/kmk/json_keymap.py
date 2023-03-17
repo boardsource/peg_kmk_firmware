@@ -25,6 +25,7 @@ class PegOledDisplayKeys:
     corner_two = 'cornerTwo'
     corner_three = 'cornerThree'
     corner_four = 'cornerFour'
+    images='images'
     zero = '0'
     one = '1'
     to_display = 'toDisplay'
@@ -57,19 +58,17 @@ class JsonMap:
         self._json_path = json_path
         if keyboard:
             self._keyboard = keyboard
+            self.read_json()
         else:
             print('importing json kb')
             from kmk.json_keyboard import JsonKb
-
             self._keyboard = JsonKb(json_path)
-
-        self.read_json()
+            self._data=self._keyboard.keymap_dict['data']
         gc.collect()
-        print('mem after gc and reading json', gc.mem_free())
         self.process_data()
-        # self._keyboard.clean_up()
+        self._keyboard.clean_up()
         gc.collect()
-        print('mem after gc and process_data', gc.mem_free())
+     
 
     def return_keyboard(self):
         return self._keyboard
@@ -79,8 +78,7 @@ class JsonMap:
             f = open(self._json_path, 'r')
             keymap_string = f.read()
             f.close()
-            keymap_dict = json.loads(keymap_string)
-            self._data = keymap_dict['data']
+            self._data = json.loads(keymap_string)['data']
         except:
             print('keymap file load failed')
 
@@ -162,7 +160,17 @@ class JsonMap:
                 oled_data[DataKeys.peg_oled_display_keys.to_display]
                 == OledDisplayMode.IMG
             ):
-                pass
+                oled_ext = Oled(OledData(
+                      image={0:oled_data[DataKeys.peg_oled_display_keys.images][
+                                DataKeys.peg_oled_display_keys.zero
+                            ],
+                            1:oled_data[DataKeys.peg_oled_display_keys.images][
+                                DataKeys.peg_oled_display_keys.one
+                            ]}
+                    ),
+                    toDisplay=OledDisplayMode.IMG,
+                    flip=oled_data[DataKeys.peg_oled_display_keys.flip],
+                )
             self._keyboard.extensions.append(oled_ext)
         except:
             if self._keyboard.debug_enabled:

@@ -6,7 +6,7 @@ class FeaturesKeys:
     split="split"
     rightSide="rightSide"
     serial_write="serial_write"
-class DataBoot:
+class JsonBoot:
     storage_mode=True
     boot_loader=False
     need_to_rename=True

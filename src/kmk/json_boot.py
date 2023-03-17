@@ -1,5 +1,3 @@
-# The JsonBoot class is a Python class that reads and processes a JSON file containing keyboard
-# configuration data, and handles various setup tasks based on the data.
 import json
 from kmk.json_keyboard import InfoKeys,DevelopmentBoards
 class FeaturesKeys:

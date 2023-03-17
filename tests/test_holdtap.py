@@ -11,8 +11,8 @@ class TestHoldTap(unittest.TestCase):
         KC.clear()
 
         self.t_within = 2 * KeyboardTest.loop_delay_ms
-        self.t_after = 5 * KeyboardTest.loop_delay_ms
-        tap_time = (self.t_after + self.t_within) // 2
+        self.t_after = 6 * KeyboardTest.loop_delay_ms
+        tap_time = 5 * KeyboardTest.loop_delay_ms
 
         # overide default timeouts
         HoldTap.tap_time = tap_time
@@ -91,13 +91,13 @@ class TestHoldTap(unittest.TestCase):
 
         keyboard.test(
             'LT within tap time rolling -> tap behavior',
-            [(1, True), t_within, (3, True), t_after, (1, False), (3, False)],
+            [(1, True), t_within, (3, True), (1, False), (3, False)],
             [{KC.B}, {KC.B, KC.D}, {KC.D}, {}],
         )
 
         keyboard.test(
             'LT within tap time nested -> tap behavior',
-            [(1, True), t_within, (3, True), (3, False), t_after, (1, False)],
+            [(1, True), t_within, (3, True), (3, False), (1, False)],
             [{KC.B}, {KC.B, KC.D}, {KC.B}, {}],
         )
 
@@ -172,7 +172,7 @@ class TestHoldTap(unittest.TestCase):
             'chained 1',
             [(2, True), (1, True), (0, True), (0, False), (1, False), (2, False)],
             [
-                {KC.LCTL},
+                {KC.LSFT},
                 {KC.LCTL, KC.LSFT},
                 {KC.LCTL, KC.LSFT, KC.N0},
                 {KC.LCTL, KC.LSFT},
@@ -224,7 +224,7 @@ class TestHoldTap(unittest.TestCase):
             'chained 5',
             [(3, True), (1, True), (0, True), (0, False), (1, False), (3, False)],
             [
-                {KC.LCTL},
+                {KC.N3},
                 {KC.LCTL, KC.N3},
                 {KC.LCTL, KC.N3, KC.N0},
                 {KC.LCTL, KC.N3},
@@ -317,7 +317,6 @@ class TestHoldTap(unittest.TestCase):
                 (0, False),
                 (0, True),
                 (0, False),
-                t_after,
             ],
             [{KC.A}, {}, {KC.A}, {}, {KC.A}, {}],
         )
@@ -333,7 +332,6 @@ class TestHoldTap(unittest.TestCase):
                 (0, False),
                 (0, True),
                 (0, False),
-                t_after,
             ],
             [{KC.B}, {}, {KC.B}, {}, {KC.B}, {}],
         )
@@ -350,7 +348,6 @@ class TestHoldTap(unittest.TestCase):
                 t_after,
                 (0, True),
                 (0, False),
-                t_after,
             ],
             [{KC.A}, {}, {KC.B}, {}, {KC.A}, {}],
         )

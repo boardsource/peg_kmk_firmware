@@ -1,3 +1,4 @@
+# The JsonMap class is a helper class for parsing and processing keymap data from a JSON file for use
 import json
 import gc
 from kmk.keys import KC

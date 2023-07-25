@@ -1,3 +1,5 @@
+# The JsonKb class is a subclass of KMKKeyboard that reads and processes keyboard configuration data
+# from a JSON file.
 import json
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.modules.layers import Layers
@@ -96,7 +98,12 @@ class JsonKb(KMKKeyboard):
         self.read_json()
         self.process_data()
 
+
     def read_json(self):
+        """
+        This function reads a JSON file, loads it into a dictionary, and assigns a specific value from the
+        dictionary to a class attribute.
+        """
         try:
             f = open(self._json_path, 'r')
             keymap_string = f.read()
@@ -107,6 +114,10 @@ class JsonKb(KMKKeyboard):
             print('json file load failed')
 
     def process_data(self):
+        """
+        The function processes data by extracting settings and calling other functions based on specific
+        keys in the information dictionary.
+        """
         self.extract_settings()
         info = self._info
         if InfoKeys.matrix_pins in info:
@@ -123,6 +134,12 @@ class JsonKb(KMKKeyboard):
             self.rgb_matrix(info[InfoKeys.rgb_matrix])
 
     def rgb_matrix(self, rgb_matrix):
+        """
+        This function sets various properties of an RGB matrix based on the input dictionary.
+        
+        :param rgb_matrix: A dictionary containing information about the RGB matrix, such as the number of
+        LEDs, brightness limit, and pin configuration
+        """
         for info in rgb_matrix:
             if (
                 info == InfoKeys.rgb_matrix_keys.led_count

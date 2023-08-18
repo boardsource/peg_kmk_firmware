@@ -2,7 +2,7 @@ from kmk.extensions import Extension
 from kmk.keys import make_key
 import simpleio
 
-class International(Extension):
+class StartUpSong(Extension):
     _song_list=[
                 [ 262,  # C4
                     294,  # D4
